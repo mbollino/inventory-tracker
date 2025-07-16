@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/products/product_index.css' %}" />
+{% endblock %} {% block content %}
+
+<h1>Product Inventory</h1>
+<hr />
+<table>
+  <thead>
+    <th>Name</th>
+    <th>SKU</th>
+    <th>Quantity</th>
+    <th>Price</th>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <td>{{ product.name }}</td>
+      <td>{{ product.sku }}</td>
+      <td>{{ product.quantity }}</td>
+      <td>{{ product.price }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

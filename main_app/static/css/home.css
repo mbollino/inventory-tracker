@@ -1,0 +1,78 @@
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+main > section {
+  width: 100%;
+  padding: 10px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.header-logo-container {
+  display: none;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.product-container {
+  width: 100%;
+  max-width: 350px;
+}
+
+.product-container img {
+    width: 100%;
+    display: block;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+
+.login h1 {
+  font-size: clamp(3.2rem, 3vw, 4.8rem);
+  margin: 10px 0;
+}
+
+.login > p {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 14px 0 0px;
+}
+
+.login label {
+  font-size: var(--font-reg);
+  margin-bottom: 6px;
+}
+
+.login input {
+  font-size: var(--font-l);
+  padding: 2px 4px;
+}
+
+.login .btn {
+  align-self: flex-end;
+  margin-right: 0;
+  margin-top: 16px;
+}
+
