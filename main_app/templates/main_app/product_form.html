@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}" />
+{% endblock %} {% block content %}
+
+<div class="page-header">
+  {% if product %}
+  <h1>Edit {{ product.name }}</h1>
+  {% else %}
+  <h1>Add Inventory</h1>
+  {% endif %}
+</div>
+
+<form action="" method="post" class="form-container">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  <div class="button-container">
+    {% if product %}
+    <a href="{% url 'product_detail' product.id %}" class="btn secondary"
+      >Cancel</a
+    >
+    <button type="submit" class="btn submit">Submit</button>
+    {% else %}
+    <a href="{% url 'product_index' %}" class="btn secondary">Cancel</a>
+    <button type="submit" class="btn submit">Submit</button>
+    {% endif %}
+  </div>
+</form>
+
+{% endblock %}

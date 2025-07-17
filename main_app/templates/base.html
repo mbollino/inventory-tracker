@@ -21,8 +21,9 @@
         </div>
         <nav>
             <ul>
-                <li><a href="/products">Inventory</a></li>
-                <li><a href="/about">About</a></li>
+                <li><a href="{% url 'product_index' %}">Inventory</a></li>
+                <li><a href="{% url 'product_create' %}">Add Inventory</li>
+                <li><a href="{% url 'about' %}">About</a></li>
             </ul>
         </nav>
     </header>
