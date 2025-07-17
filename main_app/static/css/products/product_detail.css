@@ -17,16 +17,15 @@
   margin-top: auto;
 }
 
-.feedings-toy-container {
+.orders-container {
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
-  align-items: center;
+  margin-left: 30px;
+  align-items: left;
 }
 
 .subsection-title {
-  display: flex;
-  align-items: center;
   margin-bottom: 12px;
 }
 
@@ -78,8 +77,8 @@
 }
 
 
-.feedings-toy-container > section {
-  width: 80%;
+.orders-container > section {
+  width: 47%;
   min-width: 360px;
   border: var(--borders);
   border-radius: var(--card-border-radius);
@@ -91,22 +90,13 @@
   margin-bottom: 20px;
 }
 
-.subsection-title img {
-  height: 42px;
-  margin-left: 8px;
-}
-
-.subsection-title img:first-of-type {
-  margin-left: 16px;
-}
-
-.feedings h2,
+.orders h2,
 .toys h2 {
   font-size: 3.2rem;
   margin: 0;
 }
 
-.feedings h3,
+.orders h3,
 .toys h3 {
   font-size: var(--font-xl);
   margin: 10px 0;
@@ -124,26 +114,26 @@
   padding: 3px;
 }
 
-.feedings table {
+.orders table {
   width: calc(100% - 16px);
   text-align: left;
   border-collapse: collapse;
   margin: 0 8px;
 }
 
-.feedings td {
+.orders td {
   padding: 8px 5px;
   font-size: var(--font-reg);
 }
 
-.feedings th {
+.orders th {
   font-size: var(--font-l);
   padding: 5px 5px 0;
-  border-bottom: rgb(36, 116, 248) solid 2px;
+  border-bottom: rgb(200, 94, 122) solid 2px;
 }
 
-.feedings tr:nth-child(even) {
-  background-color: #f3f3fd;
+.orders tr:nth-child(even) {
+  background-color: rgb(245,245,245);
 }
 
 .toy-container p {
