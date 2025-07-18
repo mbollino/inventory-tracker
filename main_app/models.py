@@ -1,7 +1,19 @@
 from django.db import models
 from django.urls import reverse
 
+class Supplier(models.Model):
+    company_name = models.CharField(max_length=100)
+    order_link=models.URLField(max_length=200)
+    contact_person = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    phone_number = models.CharField(max_length=20)
+    address = models.TextField(max_length=100)
 
+    def __str__(self):
+        return self.company_name
+    
+    def get_absolute_url(self):
+        return reverse('supplier_detail', kwargs={'pk': self.id})
 
 class Product(models.Model):
     name = models.CharField(max_length=100)

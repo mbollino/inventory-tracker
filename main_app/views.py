@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Product
+from django.views.generic import ListView, DetailView
+from .models import Product, Supplier
 from .forms import OrderForm
 
 def home(request):
@@ -39,5 +40,14 @@ def add_order(request, product_id):
         new_order.product_id = product_id
         new_order.save()
     return redirect('product_detail', product_id=product_id)
-    
 
+class SupplierCreate(CreateView):
+    model = Supplier
+    fields = '__all__'
+    
+class SupplierList(ListView):
+    model = Supplier
+
+class SupplierDetail(DetailView):
+    model = Supplier
+   
