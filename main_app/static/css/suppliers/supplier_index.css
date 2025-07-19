@@ -34,13 +34,11 @@
 
 .card h2 {
   font-size: var(--font-xl);
-  /* margin: 0 0 10px 0; */
-  margin-bottom: 12px;
+   margin-bottom: 12px;
 }
 
 .card p {
   font-size: var(--font-reg);
-  /* line-height: 1.6; */
   margin-bottom: 8px;
 }
 

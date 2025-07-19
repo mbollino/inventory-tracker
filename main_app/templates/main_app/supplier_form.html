@@ -16,7 +16,14 @@
     <table>
       {{ form.as_table }}
     </table>
-    <button type="submit" class="btn submit">Submit</button>
+    <div class="button-container">
+      <button type="submit" class="btn submit">Submit</button>
+      {% if supplier %}
+      <a href="{% url 'supplier_detail' supplier.id %}" class="btn secondary">Cancel</a>
+      {% else %}
+      <a href="{% url 'supplier_index' %}" class="btn secondary">Cancel</a>
+      {% endif %}
+    </div>
   </form>
 
 {% endblock %}

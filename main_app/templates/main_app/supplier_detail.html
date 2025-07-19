@@ -1,0 +1,34 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/suppliers/supplier_detail.css' %}" />
+{% endblock %} 
+{% block content %}
+
+<div class="supplier-details">
+    <h2>{{ supplier.company_name }}</h2>
+    <p>Inventory orders:  <a href="{{ supplier.order_link }}" target="_blank">{{ supplier.order_link }}</a></p>
+    <p>Primary Contact: {{ supplier.contact_person }}</p>
+    <p>Email: {{ supplier.email }}</p>
+    <p>Phone number: {{ supplier.phone_number }}</p>
+    <p>Address: {{ supplier.address }}</p>
+</div>
+<div class="supplier-actions">
+    <a href="{% url 'supplier_update' supplier.id %}" class="btn warn">Edit</a>
+    <a href="{% url 'supplier_delete' supplier.id %}" class="btn danger">Delete</a>
+</div>
+<div class="available-products">
+{% if products %}
+    <h2>Available Products</h2>
+    <ul>
+        {% for product in products %}
+        <li>
+            <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+            (SKU: {{ product.sku }})
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+</div>
+
+{% endblock %}

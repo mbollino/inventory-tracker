@@ -16,14 +16,11 @@
     {{ form.as_table }}
   </table>
   <div class="button-container">
-    {% if product %}
-    <a href="{% url 'product_detail' product.id %}" class="btn secondary"
-      >Cancel</a
-    >
     <button type="submit" class="btn submit">Submit</button>
+    {% if product %}
+    <a href="{% url 'product_detail' product.id %}" class="btn secondary">Cancel</a>
     {% else %}
     <a href="{% url 'product_index' %}" class="btn secondary">Cancel</a>
-    <button type="submit" class="btn submit">Submit</button>
     {% endif %}
   </div>
 </form>

@@ -16,9 +16,12 @@ def product_index(request):
 
 def product_detail(request, product_id):
     product = Product.objects.get(id=product_id)
+    suppliers_product_doesnt_have = Supplier.objects.exclude(id__in = product.suppliers.all().values_list('id'))
     order_form = OrderForm()
     return render(request, 'products/detail.html', {
-        'product': product, 'order_form': order_form
+        'product': product, 
+        'order_form': order_form,
+        'suppliers': suppliers_product_doesnt_have,
         })
 
 class ProductCreate(CreateView):
@@ -47,7 +50,30 @@ class SupplierCreate(CreateView):
     
 class SupplierList(ListView):
     model = Supplier
+    context_object_name = 'suppliers'
+    template_name = 'suppliers/supplier_index.html'
 
 class SupplierDetail(DetailView):
     model = Supplier
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        supplier = self.get_object()
+        context['products'] = supplier.products.all()
+        return context
    
+class SupplierUpdate(UpdateView):
+    model = Supplier
+    fields = '__all__'
+
+class SupplierDelete(DeleteView):
+    model = Supplier
+    success_url = '/suppliers/'
+
+def associate_supplier(request, product_id, supplier_id):
+    Product.objects.get(id=product_id).suppliers.add(supplier_id)
+    return redirect('product_detail', product_id=product_id)
+
+def remove_supplier(request, product_id, supplier_id):
+    Product.objects.get(id=product_id).suppliers.remove(supplier_id)
+    return redirect('product_detail', product_id=product_id)

@@ -5,14 +5,11 @@ table {
   font-size: 1.5rem;
 }
 
-
 th, td {
   padding: 10px;
   border-bottom: 2px solid #ccc;
   text-align: left;
 }
-
-
 
 a {
   text-decoration: none;

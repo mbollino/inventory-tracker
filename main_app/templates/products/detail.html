@@ -35,27 +35,76 @@
 
     <h3>Open Orders</h3>
     {% if product.order_set.all.count %}
-    <table>
-      <thead>
-        <tr>
-          <th>Quantity</th>
-          <th>Date Ordered</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for order in product.order_set.all %}
-        <tr>
-          <td>{{order.quantity_ordered}}</td>
-          <td>{{order.order_date}}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="table-scroll">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Quantity</th>
+            <th>Date Ordered</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in product.order_set.all %}
+          <tr>
+            <td>{{order.quantity_ordered}}</td>
+            <td>{{order.order_date}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
     {% else %}
     <div class="subsection-content">
-      <p>⚠️ No open orders</p>
+      <p class="no-orders">No open orders</p>
     </div>
     {% endif %}
   </section>
+
+  <section class="suppliers">
+  <div class="subsection-title">
+    <h2>Suppliers</h2>
+  </div>
+
+  <h3>Suppliers for {{ product.name }}</h3>
+  <div class="subsection-content">
+    {% if product.suppliers.count %} 
+      {% for supplier in product.suppliers.all %}
+        <div class="supplier-container">
+          <a href="{% url 'supplier_detail' supplier.id %}">
+            <p>{{ supplier.company_name }}</p>
+          </a>
+          <form action="{% url 'remove_supplier' product.id supplier.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Remove Supplier</button>
+        </form>
+        </div>
+      {% endfor %} 
+    {% else %}
+      <p class="no-suppliers">Add suppliers for {{ product.name }}</p>
+    {% endif %}
+  </div>
+
+  <h3>Available Suppliers</h3>
+  <div class="supplier-list-scroll">
+    <div class="subsection-content">
+      {% if suppliers.count %}
+      {% for supplier in suppliers %}
+      <div class="supplier-container">
+        <a href="{% url 'supplier_detail' supplier.id %}">
+          <p>{{ supplier.company_name }}</p>
+        </a>
+        <form action="{% url 'associate_supplier' product.id supplier.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn submit">Add Supplier</button>
+        </form>
+      </div>
+      {% endfor %}
+      {% else %}
+      <p class="all-suppliers">No more available suppliers</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
 </div>
 {% endblock %}

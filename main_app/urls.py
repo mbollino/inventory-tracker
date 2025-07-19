@@ -13,5 +13,8 @@ urlpatterns = [
     path('suppliers/create/', views.SupplierCreate.as_view(), name='supplier_create'),
     path('suppliers/<int:pk>/', views.SupplierDetail.as_view(), name='supplier_detail'),
     path('suppliers/', views.SupplierList.as_view(), name='supplier_index'),
-     
+    path('suppliers/<int:pk>/update/', views.SupplierUpdate.as_view(), name='supplier_update'),    
+    path('suppliers/<int:pk>/delete/', views.SupplierDelete.as_view(), name='supplier_delete'),    
+    path('products/<int:product_id>/associate-supplier/<int:supplier_id>/', views.associate_supplier, name='associate_supplier'),    
+    path('products/<int:product_id>/remove-supplier/<int:supplier_id>/', views.remove_supplier, name='remove_supplier'),    
 ]
