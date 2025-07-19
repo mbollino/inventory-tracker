@@ -11,7 +11,11 @@
     <p>Primary Contact: {{ supplier.contact_person }}</p>
     <p>Email: {{ supplier.email }}</p>
     <p>Phone number: {{ supplier.phone_number }}</p>
-    <p>Address: {{ supplier.address }}</p>
+    <p>Address:</p> 
+    <div class="supplier-address">
+        <p>{{supplier.address_fk.street_address}}</p> 
+        <p>{{supplier.address_fk.city}}, {{supplier.address_fk.state}} {{supplier.address_fk.postal_code}}</p>
+    </div>
 </div>
 <div class="supplier-actions">
     <a href="{% url 'supplier_update' supplier.id %}" class="btn warn">Edit</a>
