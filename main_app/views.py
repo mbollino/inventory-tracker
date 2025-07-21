@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.models import Group
 from .models import Product, Supplier
 from .forms import OrderForm, UserForm, SupplierForm, AddressForm
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -39,11 +40,17 @@ def product_index(request):
 def product_detail(request, product_id):
     product = Product.objects.get(id=product_id)
     suppliers_product_doesnt_have = Supplier.objects.exclude(id__in = product.suppliers.all().values_list('id'))
+
+    user_groups = request.user.groups.values_list('name', flat=True)
+    is_editor_or_admin = not 'ZojaViewers' in user_groups
+
     order_form = OrderForm()
+
     return render(request, 'products/detail.html', {
         'product': product, 
         'order_form': order_form,
         'suppliers': suppliers_product_doesnt_have,
+        'is_editor_or_admin': is_editor_or_admin
         })
 
 class ProductCreate(LoginRequiredMixin, ZojaEditorOnlyMixin, CreateView):
@@ -109,7 +116,12 @@ class SupplierDetail(LoginRequiredMixin, ZojaOnlyMixin, DetailView):
         context = super().get_context_data(**kwargs)
         supplier = self.get_object()
         context['products'] = supplier.products.all()
+            
+        user_groups = self.request.user.groups.values_list('name', flat=True)
+        context ['is_editor_or_admin'] = 'ZojaViewers' not in user_groups
+
         return context
+
    
 class SupplierUpdate(LoginRequiredMixin, ZojaEditorOnlyMixin, UpdateView):
     def get(self, request, pk):

@@ -17,10 +17,12 @@
         <p>{{supplier.company_address.city}}, {{supplier.company_address.state}} {{supplier.company_address.postal_code}}</p>
     </div>
 </div>
+{% if is_editor_or_admin %}
 <div class="supplier-actions">
     <a href="{% url 'supplier_update' supplier.id %}" class="btn warn">Edit</a>
     <a href="{% url 'supplier_delete' supplier.id %}" class="btn danger">Delete</a>
 </div>
+{% endif %}
 <div class="available-products">
 {% if products %}
     <h2>Available Products</h2>
