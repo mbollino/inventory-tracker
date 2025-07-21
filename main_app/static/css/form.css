@@ -28,6 +28,13 @@ td > * {
   font-size: var(--font-l);
 }
 
+.signup-button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: auto;
+}
+
 .button-container {
     display: flex;
     gap: 10px;

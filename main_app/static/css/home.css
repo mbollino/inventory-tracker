@@ -1,68 +1,59 @@
 main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  height: 100%;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
 
-main > section {
+main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
   width: 100%;
-  padding: 10px 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  background-image: url('../images/header-logo.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+  z-index: 1;
+}
+
+main > * {
+  position: relative;
+  z-index: 2;
 }
 
 .header-logo-container {
   display: none;
 }
 
-.logo-container {
+.login-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.product-container {
-  width: 100%;
-  max-width: 350px;
-}
-
-.product-container img {
-    width: 100%;
-    display: block;
+  margin-top: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .login {
+  color: #1f1f1f;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  margin: 10px;
+  transition: transform 0.2s ease;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
+  padding: 40px;
 }
 
 .login h1 {
-  font-size: clamp(3.2rem, 3vw, 4.8rem);
-  margin: 10px 0;
+  font-size: 4em;
 }
 
-.login > p {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 14px 0 0px;
-}
-
-.login label {
-  font-size: var(--font-reg);
-  margin-bottom: 6px;
+.login >p {
+  font-size: 2em;
 }
 
 .login input {
@@ -71,8 +62,7 @@ main > section {
 }
 
 .login .btn {
+  margin-top: 20px;
   align-self: flex-end;
-  margin-right: 0;
-  margin-top: 16px;
-}
 
+}

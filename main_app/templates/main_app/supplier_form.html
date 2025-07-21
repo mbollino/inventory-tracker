@@ -1,29 +1,33 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block head %}
-  <link rel="stylesheet" href="{% static 'css/form.css' %}" />
-{% endblock %} 
+<link rel="stylesheet" href="{% static 'css/form.css' %}" />
+{% endblock %}
 {% block content %}
-  <div class="page-header">
-    {% if object %}
-      <h1>Edit {{object.name}}</h1>
+<div class="page-header">
+  {% if object %}
+  <h1>Edit {{object.name}}</h1>
+  {% else %}
+  <h1>Add New Supplier</h1>
+  {% endif %}
+</div>
+<form action="" method="post" class="form-container" autocomplete="off">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+    <tr>
+      <th colspan="2">Company Address</th>
+    </tr>
+    {{ address_form.as_table }}
+  </table>
+  <div class="button-container">
+    <button type="submit" class="btn submit">Submit</button>
+    {% if supplier %}
+    <a href="{% url 'supplier_detail' supplier.id %}" class="btn secondary">Cancel</a>
     {% else %}
-      <h1>Add New Supplier</h1>
+    <a href="{% url 'supplier_index' %}" class="btn secondary">Cancel</a>
     {% endif %}
   </div>
-  <form action="" method="post" class="form-container" autocomplete="off">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-    </table>
-    <div class="button-container">
-      <button type="submit" class="btn submit">Submit</button>
-      {% if supplier %}
-      <a href="{% url 'supplier_detail' supplier.id %}" class="btn secondary">Cancel</a>
-      {% else %}
-      <a href="{% url 'supplier_index' %}" class="btn secondary">Cancel</a>
-      {% endif %}
-    </div>
-  </form>
+</form>
 
 {% endblock %}
