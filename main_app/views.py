@@ -9,6 +9,7 @@ from .models import Product, Supplier
 from .forms import OrderForm, UserForm, SupplierForm, AddressForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Q
 
 class Home(LoginView):
     template_name = 'home.html'
@@ -32,8 +33,20 @@ class ZojaEditorOnlyMixin(UserPassesTestMixin):
 @login_required
 @user_passes_test(is_zoja_user)
 def product_index(request):
+    query = request.GET.get('q')
     products = Product.objects.all()
-    return render(request, 'products/index.html', {'products': products})
+
+    if query:
+        products = products.filter(
+            Q(name__icontains=query) |
+            Q(sku__icontains=query) |
+            Q(color__icontains=query)
+        )
+
+    return render(request, 'products/index.html', {
+        'products': products,
+        'query': query,
+        })
 
 @login_required
 @user_passes_test(is_zoja_user)
@@ -108,6 +121,22 @@ class SupplierList(LoginRequiredMixin, ZojaOnlyMixin, ListView):
     model = Supplier
     context_object_name = 'suppliers'
     template_name = 'suppliers/supplier_index.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        suppliers = Supplier.objects.all()
+        if query:
+            suppliers = suppliers.filter(
+                Q(company_name__icontains=query) |
+                Q(contact_person__icontains=query) |
+                Q(email__icontains=query)
+            )
+        return suppliers
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.request.GET.get('q', "")
+        return context
 
 class SupplierDetail(LoginRequiredMixin, ZojaOnlyMixin, DetailView):
     model = Supplier

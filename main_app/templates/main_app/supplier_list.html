@@ -1,7 +1,10 @@
 {% extends 'base.html' %} {% load static %} {% block head %}
 <link rel="stylesheet" href="{% static 'css/suppliers/supplier_index.css' %}" />
 {% endblock %} {% block content %}
-
+<form method="get" action="{% url 'supplier_index' %}">
+  <input type="text" name="q" placeholder="Search suppliers..." value="{{ query }}">
+  <button type="submit">Search</button>
+</form>
 <section class="page-header">
   <h1>All Suppliers</h1>
 </section>
