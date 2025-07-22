@@ -9,6 +9,7 @@
   <div class="product-details">
     <h1><u>{{ product.name }}</u></h1>
     <h2>Color: {{ product.color }}</h2>
+    <h2>Size: {{ product.size }}</h2>
     <h2>SKU: {{ product.sku }}</h2>
     <h2>Quantity: {{ product.quantity }}</h2>
     <h2>Price: ${{ product.price }}</h2>
@@ -41,7 +42,7 @@
     {% endif %}
 
     <h3><u>Open Orders</u></h3>
-    {% if product.order_set.all.count %}
+    {% if product.orders.exists %}
     <div class="table-scroll">
       <table>
         <thead>
@@ -51,7 +52,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for order in product.order_set.all %}
+          {% for order in product.orders.all %}
           <tr>
             <td>{{order.quantity_ordered}}</td>
             <td>{{order.order_date}}</td>

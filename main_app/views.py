@@ -55,7 +55,7 @@ def product_detail(request, product_id):
 
 class ProductCreate(LoginRequiredMixin, ZojaEditorOnlyMixin, CreateView):
     model = Product
-    fields=['name', 'color', 'sku', 'quantity', 'price']
+    fields=['name', 'color', 'size', 'sku', 'quantity', 'price']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -63,7 +63,7 @@ class ProductCreate(LoginRequiredMixin, ZojaEditorOnlyMixin, CreateView):
 
 class ProductUpdate(LoginRequiredMixin, ZojaEditorOnlyMixin, UpdateView):
     model = Product
-    fields=['name', 'color', 'sku', 'quantity', 'price']
+    fields=['name', 'color', 'size', 'sku', 'quantity', 'price']
 
 class ProductDelete(LoginRequiredMixin, ZojaEditorOnlyMixin, DeleteView):
     model = Product

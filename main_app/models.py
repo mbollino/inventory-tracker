@@ -2,6 +2,16 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 
+SIZES = (
+    ('', 'Choose an option'),
+    ('XS', 'Extra Small'),
+    ('S', 'Small'),
+    ('M', 'Medium'),
+    ('L', 'Large'),
+    ('XL', 'Extra Large'),
+    ('NS', 'No sizing for product'),
+)
+
 class Address(models.Model):
     street_address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
@@ -25,6 +35,11 @@ class Supplier(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=100)
     color = models.CharField(max_length=20)
+    size = models.CharField (
+        max_length=2,
+        choices=SIZES,
+        default=SIZES[0][0]
+    )
     sku = models.CharField(max_length=100)
     quantity = models.IntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -34,6 +49,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        ordering = ['quantity']
     
     def get_absolute_url(self):
         return reverse('product_detail', kwargs={'product_id': self.id})

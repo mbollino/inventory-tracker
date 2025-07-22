@@ -8,15 +8,17 @@
   <thead>
     <th>Name</th>
     <th>Color</th>
+    <th>Size</th>
     <th>SKU</th>
     <th>Quantity</th>
     <th>Price</th>
   </thead>
   <tbody>
     {% for product in products %}
-    <tr>
+    <tr {% if product.quantity <= 5 %} style="background-color: rgb(255,230,230); color: rgb(179,0,0); font-weight: bold;"{% endif %}>
       <td><a href="{% url 'product_detail' product.id %}">{{ product.name }} </a></td>
       <td>{{ product.color }}</td>
+      <td>{{ product.size }}</td>
       <td>{{ product.sku }}</td>
       <td>{{ product.quantity }}</td>
       <td>${{ product.price }}</td>
